@@ -1,4 +1,4 @@
-# dogfood
+# 🐶 dogfood
 
 This is the dogfood repository for Flood IO where we get to test out different tests and methodologies as they relate to load testing.
 
