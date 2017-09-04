@@ -1,0 +1,26 @@
+{
+  "apiVersion": "21-08-17",
+
+  "settings": {
+    "duration": 1800e3,
+    "userAgent": "I AM ROBOT"
+  },
+  "plan": [
+    {
+      "steps": [
+        {
+          "name": "Watirspec Home",
+          "actions": [
+            { "visit":  "http://watirspec-elb-760457001.us-west-2.elb.amazonaws.com" }
+          ]
+        },
+        {
+          "name": "Tables",
+          "actions": [
+            { "visit": "/tables.html" }
+          ]
+        },
+      ]
+    }
+  ]
+}

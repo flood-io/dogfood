@@ -22,3 +22,5 @@ destroy: ## Check target dependencies
 	@cd terraform/$(target)/asg && TF_VAR_dd_api_key=$(DD_API_KEY) terraform destroy -var-file=$(_ROOT_DIR)/terraform.tfvars
 	@cd terraform/$(target)/elb && terraform destroy -var-file=$(_ROOT_DIR)/terraform.tfvars
 
+test: ## Test flood-chrome locally
+	@docker run -v ${_ROOT_DIR}/spec/flood-chrome:/test -it --rm floodio/chrome bash -c "npm run build /test/$(target).json"
