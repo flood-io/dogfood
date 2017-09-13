@@ -1,9 +1,11 @@
-package dogfood 
+package dogfood
 
 import (
 	"net/http"
 	"fmt"
 	"github.com/gorilla/mux"
+	"io/ioutil"
+	"os"
 )
 
 type Route struct {
@@ -32,11 +34,27 @@ func NewRouter() *mux.Router {
 	return router
 }
 
+func Swagger(w http.ResponseWriter, r *http.Request) {
+	file, e := ioutil.ReadFile("/config/swagger.json")
+  if e != nil {
+      fmt.Printf("File error: %v\n", e)
+      os.Exit(1)
+  }
+  fmt.Fprintf(w, string(file))
+}
+
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+	fmt.Fprintf(w, "Woof Woof")
 }
 
 var routes = Routes{
+	Route{
+		"Swagger",
+		"GET",
+		"/v2/swagger",
+		Swagger,
+	},
+
 	Route{
 		"Index",
 		"GET",
