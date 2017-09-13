@@ -1,0 +1,62 @@
+#cloud-config
+users:
+  - name: core
+    coreos-ssh-import-github-users:
+      - 90kts
+    groups:
+      - sudo
+      - docker
+      - systemd-journal
+write_files:
+  - path: /etc/profile.d/aliases.sh
+    content: |
+      alias s=systemctl
+      alias j=journalctl
+      alias d=docker
+
+coreos:
+  update:
+    reboot-strategy: off
+  units:
+    - name: docker.service
+      drop-ins:
+        - name: 30-increase-ulimit.conf
+          content: |
+            [Service]
+            LimitMEMLOCK=infinity
+      command: restart
+    - name: etcd2.service
+      command: stop
+    - name: fleet.service
+      command: stop
+    - name: dogfood.service
+      command: start
+      content: |
+        [Unit]
+        Description=dogfood.flood.io
+        After=docker.service
+        [Service]
+        User=core
+        TimeoutStartSec=0
+        Restart=always
+        ExecStartPre=-/usr/bin/docker kill dogfood
+        ExecStartPre=-/usr/bin/docker rm dogfood
+        ExecStartPre=/usr/bin/docker pull floodio/dogfood
+        ExecStart=/usr/bin/docker run --name dogfood --log-driver=none -p 8080:80 floodio/dogfood
+        ExecStop=/usr/bin/docker stop dogfood
+    - name: datadog.service
+      command: stop
+      content: |
+        [Unit]
+        Description=dd-agent
+        Requires=docker.service
+        [Service]
+        User=core
+        TimeoutStartSec=0
+        Restart=always
+        ExecStartPre=-/usr/bin/docker kill dd-agent
+        ExecStartPre=-/usr/bin/docker rm dd-agent
+        ExecStartPre=-/usr/bin/docker pull datadog/docker-dd-agent:latest
+        ExecStart=/usr/bin/docker run --name dd-agent --net=host -v /home/core/conf.d:/conf.d:ro -v /var/run/docker.sock:/var/run/docker.sock -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=DD_API_KEY -e TAGS=asg:dogfood datadog/docker-dd-agent:latest
+        ExecStop=/usr/bin/docker stop dd-agent
+
