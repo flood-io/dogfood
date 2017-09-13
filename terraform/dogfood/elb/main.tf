@@ -61,7 +61,7 @@ resource "aws_elb" "dogfood-elb" {
     healthy_threshold = 2
     unhealthy_threshold = 2
     timeout = 3
-    target = "HTTP:8080/"
+    target = "HTTP:8080/v2/"
     interval = 30
   }
 
