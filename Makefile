@@ -24,3 +24,11 @@ destroy: ## Check target dependencies
 
 test: ## Test flood-chrome locally
 	@docker run -v ${_ROOT_DIR}/spec/flood-chrome:/test -it --rm floodio/chrome bash -c "npm run build /test/$(target).json"
+
+src:
+	@rm -rf dockerfiles/dogfood/src
+	@swagger-codegen generate \
+		-i dockerfiles/dogfood/html/swagger.json \
+		-l go-server \
+		-o dockerfiles/dogfood/src
+	@cd dockerfiles/dogfood/src/go && sed -i '' -e 's/package/package dogfood/g' *.go

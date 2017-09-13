@@ -1,3 +1,8 @@
-FROM nginx:mainline-alpine
+FROM golang:latest
+RUN apt-get update && apt-get install upx -y
+RUN go get github.com/gorilla/mux
 
-COPY html /usr/share/nginx/html
+ADD src /go/src/
+WORKDIR /go/src/
+
+CMD ["go", "run", "main.go"]

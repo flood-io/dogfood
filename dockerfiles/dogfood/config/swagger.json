@@ -4,24 +4,24 @@
     "description": "This is a sample server dogfood server. For this sample, you can use the api key `special-key` to test the authorization filters.",
     "version": "1.0.0",
     "title": "Swagger dogfood",
-    "termsOfService": "http://swagger.io/terms/",
+    "termsOfService": "http://dogfood.flooded.io/terms/",
     "contact": {
-      "email": "apiteam@swagger.io"
+      "email": "support@flood.io"
     },
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "dogfood.swagger.io",
+  "host": "dogfood.flooded.io",
   "basePath": "/v2",
   "tags": [
     {
-      "name": "pet",
-      "description": "Everything about your Pets",
+      "name": "dog",
+      "description": "Everything about your dogs",
       "externalDocs": {
         "description": "Find out more",
-        "url": "http://swagger.io"
+        "url": "http://dogfood.flooded.io"
       }
     },
     {
@@ -33,7 +33,7 @@
       "description": "Operations about user",
       "externalDocs": {
         "description": "Find out more about our store",
-        "url": "http://swagger.io"
+        "url": "http://dogfood.flooded.io"
       }
     }
   ],
@@ -41,14 +41,14 @@
     "http"
   ],
   "paths": {
-    "/pet": {
+    "/dog": {
       "post": {
         "tags": [
-          "pet"
+          "dog"
         ],
-        "summary": "Add a new pet to the store",
+        "summary": "Add a new dog to the store",
         "description": "",
-        "operationId": "addPet",
+        "operationId": "adddog",
         "consumes": [
           "application/json",
           "application/xml"
@@ -61,10 +61,10 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Pet object that needs to be added to the store",
+            "description": "dog object that needs to be added to the store",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Pet"
+              "$ref": "#/definitions/dog"
             }
           }
         ],
@@ -76,19 +76,19 @@
         "security": [
           {
             "dogfood_auth": [
-              "write:pets",
-              "read:pets"
+              "write:dogs",
+              "read:dogs"
             ]
           }
         ]
       },
       "put": {
         "tags": [
-          "pet"
+          "dog"
         ],
-        "summary": "Update an existing pet",
+        "summary": "Update an existing dog",
         "description": "",
-        "operationId": "updatePet",
+        "operationId": "updatedog",
         "consumes": [
           "application/json",
           "application/xml"
@@ -101,10 +101,10 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Pet object that needs to be added to the store",
+            "description": "dog object that needs to be added to the store",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Pet"
+              "$ref": "#/definitions/dog"
             }
           }
         ],
@@ -113,7 +113,7 @@
             "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Pet not found"
+            "description": "dog not found"
           },
           "405": {
             "description": "Validation exception"
@@ -122,21 +122,21 @@
         "security": [
           {
             "dogfood_auth": [
-              "write:pets",
-              "read:pets"
+              "write:dogs",
+              "read:dogs"
             ]
           }
         ]
       }
     },
-    "/pet/findByStatus": {
+    "/dog/findByStatus": {
       "get": {
         "tags": [
-          "pet"
+          "dog"
         ],
-        "summary": "Finds Pets by status",
+        "summary": "Finds dogs by status",
         "description": "Multiple status values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
+        "operationId": "finddogsByStatus",
         "produces": [
           "application/xml",
           "application/json"
@@ -166,7 +166,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Pet"
+                "$ref": "#/definitions/dog"
               }
             }
           },
@@ -177,21 +177,21 @@
         "security": [
           {
             "dogfood_auth": [
-              "write:pets",
-              "read:pets"
+              "write:dogs",
+              "read:dogs"
             ]
           }
         ]
       }
     },
-    "/pet/findByTags": {
+    "/dog/findByTags": {
       "get": {
         "tags": [
-          "pet"
+          "dog"
         ],
-        "summary": "Finds Pets by tags",
+        "summary": "Finds dogs by tags",
         "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
-        "operationId": "findPetsByTags",
+        "operationId": "finddogsByTags",
         "produces": [
           "application/xml",
           "application/json"
@@ -215,7 +215,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Pet"
+                "$ref": "#/definitions/dog"
               }
             }
           },
@@ -226,31 +226,31 @@
         "security": [
           {
             "dogfood_auth": [
-              "write:pets",
-              "read:pets"
+              "write:dogs",
+              "read:dogs"
             ]
           }
         ],
         "deprecated": true
       }
     },
-    "/pet/{petId}": {
+    "/dog/{dogId}": {
       "get": {
         "tags": [
-          "pet"
+          "dog"
         ],
-        "summary": "Find pet by ID",
-        "description": "Returns a single pet",
-        "operationId": "getPetById",
+        "summary": "Find dog by ID",
+        "description": "Returns a single dog",
+        "operationId": "getdogById",
         "produces": [
           "application/xml",
           "application/json"
         ],
         "parameters": [
           {
-            "name": "petId",
+            "name": "dogId",
             "in": "path",
-            "description": "ID of pet to return",
+            "description": "ID of dog to return",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -260,14 +260,14 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/Pet"
+              "$ref": "#/definitions/dog"
             }
           },
           "400": {
             "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Pet not found"
+            "description": "dog not found"
           }
         },
         "security": [
@@ -278,11 +278,11 @@
       },
       "post": {
         "tags": [
-          "pet"
+          "dog"
         ],
-        "summary": "Updates a pet in the store with form data",
+        "summary": "Updates a dog in the store with form data",
         "description": "",
-        "operationId": "updatePetWithForm",
+        "operationId": "updatedogWithForm",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -292,9 +292,9 @@
         ],
         "parameters": [
           {
-            "name": "petId",
+            "name": "dogId",
             "in": "path",
-            "description": "ID of pet that needs to be updated",
+            "description": "ID of dog that needs to be updated",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -302,14 +302,14 @@
           {
             "name": "name",
             "in": "formData",
-            "description": "Updated name of the pet",
+            "description": "Updated name of the dog",
             "required": false,
             "type": "string"
           },
           {
             "name": "status",
             "in": "formData",
-            "description": "Updated status of the pet",
+            "description": "Updated status of the dog",
             "required": false,
             "type": "string"
           }
@@ -322,19 +322,19 @@
         "security": [
           {
             "dogfood_auth": [
-              "write:pets",
-              "read:pets"
+              "write:dogs",
+              "read:dogs"
             ]
           }
         ]
       },
       "delete": {
         "tags": [
-          "pet"
+          "dog"
         ],
-        "summary": "Deletes a pet",
+        "summary": "Deletes a dog",
         "description": "",
-        "operationId": "deletePet",
+        "operationId": "deletedog",
         "produces": [
           "application/xml",
           "application/json"
@@ -347,9 +347,9 @@
             "type": "string"
           },
           {
-            "name": "petId",
+            "name": "dogId",
             "in": "path",
-            "description": "Pet id to delete",
+            "description": "dog id to delete",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -360,23 +360,23 @@
             "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Pet not found"
+            "description": "dog not found"
           }
         },
         "security": [
           {
             "dogfood_auth": [
-              "write:pets",
-              "read:pets"
+              "write:dogs",
+              "read:dogs"
             ]
           }
         ]
       }
     },
-    "/pet/{petId}/uploadImage": {
+    "/dog/{dogId}/uploadImage": {
       "post": {
         "tags": [
-          "pet"
+          "dog"
         ],
         "summary": "uploads an image",
         "description": "",
@@ -389,9 +389,9 @@
         ],
         "parameters": [
           {
-            "name": "petId",
+            "name": "dogId",
             "in": "path",
-            "description": "ID of pet to update",
+            "description": "ID of dog to update",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -422,8 +422,8 @@
         "security": [
           {
             "dogfood_auth": [
-              "write:pets",
-              "read:pets"
+              "write:dogs",
+              "read:dogs"
             ]
           }
         ]
@@ -434,7 +434,7 @@
         "tags": [
           "store"
         ],
-        "summary": "Returns pet inventories by status",
+        "summary": "Returns dog inventories by status",
         "description": "Returns a map of status codes to quantities",
         "operationId": "getInventory",
         "produces": [
@@ -465,7 +465,7 @@
         "tags": [
           "store"
         ],
-        "summary": "Place an order for a pet",
+        "summary": "Place an order for a dog",
         "description": "",
         "operationId": "placeOrder",
         "produces": [
@@ -476,7 +476,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "order placed for purchasing the pet",
+            "description": "order placed for purchasing the dog",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Order"
@@ -512,7 +512,7 @@
           {
             "name": "orderId",
             "in": "path",
-            "description": "ID of pet that needs to be fetched",
+            "description": "ID of dog that needs to be fetched",
             "required": true,
             "type": "integer",
             "maximum": 10.0,
@@ -847,8 +847,8 @@
       "authorizationUrl": "http://dogfood.swagger.io/oauth/dialog",
       "flow": "implicit",
       "scopes": {
-        "write:pets": "modify pets in your account",
-        "read:pets": "read your pets"
+        "write:dogs": "modify dogs in your account",
+        "read:dogs": "read your dogs"
       }
     },
     "api_key": {
@@ -865,7 +865,7 @@
           "type": "integer",
           "format": "int64"
         },
-        "petId": {
+        "dogId": {
           "type": "integer",
           "format": "int64"
         },
@@ -960,7 +960,7 @@
         "name": "Tag"
       }
     },
-    "Pet": {
+    "dog": {
       "type": "object",
       "required": [
         "name",
@@ -1000,7 +1000,7 @@
         },
         "status": {
           "type": "string",
-          "description": "pet status in the store",
+          "description": "dog status in the store",
           "enum": [
             "available",
             "pending",
@@ -1009,7 +1009,7 @@
         }
       },
       "xml": {
-        "name": "Pet"
+        "name": "dog"
       }
     },
     "ApiResponse": {
@@ -1029,7 +1029,7 @@
     }
   },
   "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
+    "description": "Find out more about Flood IO",
+    "url": "https://flood.io"
   }
 }

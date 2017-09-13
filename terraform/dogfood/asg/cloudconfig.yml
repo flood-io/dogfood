@@ -42,7 +42,7 @@ coreos:
         ExecStartPre=-/usr/bin/docker kill dogfood
         ExecStartPre=-/usr/bin/docker rm dogfood
         ExecStartPre=/usr/bin/docker pull floodio/dogfood
-        ExecStart=/usr/bin/docker run --name dogfood --log-driver=none -p 8080:80 floodio/dogfood
+        ExecStart=/usr/bin/docker run --name dogfood --log-driver=none -p 8080:8080 floodio/dogfood
         ExecStop=/usr/bin/docker stop dogfood
     - name: datadog.service
       command: stop
