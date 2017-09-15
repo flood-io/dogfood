@@ -1,10 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample server dogfood server. For this sample, you can use the api key `special-key` to test the authorization filters.",
+    "description": "This is our sample dogfood server.",
     "version": "1.0.0",
     "title": "Swagger dogfood",
-    "termsOfService": "http://dogfood.flooded.io/terms/",
+    "termsOfService": "http://dogfood.flooded.io/v2/",
     "contact": {
       "email": "support@flood.io"
     },
@@ -21,7 +21,7 @@
       "description": "Everything about your dogs",
       "externalDocs": {
         "description": "Find out more",
-        "url": "http://dogfood.flooded.io"
+        "url": "http://dogfood.flooded.io/v2/"
       }
     },
     {
@@ -50,8 +50,7 @@
         "description": "",
         "operationId": "adddog",
         "consumes": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "produces": [
           "application/xml",
