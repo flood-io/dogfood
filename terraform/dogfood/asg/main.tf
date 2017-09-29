@@ -14,18 +14,20 @@ provider "aws" {
 }
 
 resource "aws_launch_configuration" "dogfood-launch-config" {
-  name = "dogfood-launch-config"
+  lifecycle { create_before_destroy = true }
   image_id =  "${var.image_id}"
   instance_type = "${var.instance_type}"
-  user_data = "${replace(file("cloudconfig.yml"), "DD_API_KEY", "${var.dd_api_key}")}"
   security_groups = ["allow_all_for_dogfood"]
+  user_data = "${replace(file("cloudconfig.yml"), "DD_API_KEY", "${var.dd_api_key}")}"
 }
 
 resource "aws_autoscaling_group" "dogfood-asg" {
+  lifecycle { create_before_destroy = true }
   availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  name = "dogfood-asg"
+  name = "dogfood-asg-${aws_launch_configuration.dogfood-launch-config.name}"
   max_size = "${var.asg_size}"
   min_size = "${var.asg_size}"
+  min_elb_capacity = "${var.asg_size}"
   health_check_grace_period = 600
   health_check_type = "ELB"
   desired_capacity = "${var.asg_size}"
